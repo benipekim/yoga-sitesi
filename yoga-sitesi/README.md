@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Yoga ve nefes egzersizlerine odaklanan interaktif bir kişisel web sitesi.
 
-## Getting Started
+**Canlı site:** https://yoga-sitesi.vercel.app
 
-First, run the development server:
+---
+# Yoga Sitesi — Proje Planı
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Genel Bakış
+Yoga ve nefes egzersizlerine odaklanan, kullanıcıya rehberlik eden interaktif bir kişisel web sitesi. Site; bir giriş (hero) bölümü, Pranayama (nefes egzersizleri) bölümü ve iki farklı interaktif nefes egzersizi animasyonu içerir.
+
+## Teknoloji Yığını (Tech Stack)
+- **Framework:** Next.js (App Router)
+- **Dil:** TypeScript
+- **Stil:** Tailwind CSS
+- **Animasyon:** Framer Motion, CSS transitions, requestAnimationFrame
+- **İkonlar:** lucide-react
+- **Barındırma (Hosting):** Vercel
+- **Versiyon Kontrolü:** Git + GitHub
+
+## Proje Yapısı
+```
+yoga-sitesi/
+├── app/
+│   └── page.tsx          # Ana sayfa - hero, Pranayama bölümü, modal yönetimi
+├── components/
+│   ├── blocks/
+│   │   ├── scroll-expansion-hero.tsx   # Scroll ile genişleyen hero medya bileşeni
+│   │   ├── breathing-tree.tsx          # Anuloma Viloma - nefes ritmine göre dolan ağaç animasyonu
+│   │   └── prana-mudra.tsx             # Prana Mudra - 5 aşamalı mudra geçiş animasyonu
+│   └── ui/
+│       └── flow-button.tsx             # Hover efektli, tıklanabilir buton bileşeni
+└── public/
+    └── images/            # Hero görseli ve nefes egzersizi aşama görselleri
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Ana Özellikler
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Hero Bölümü (scroll-expansion-hero.tsx)
+Kullanıcı sayfayı kaydırdıkça ortadaki görsel/medya kutusu kademeli olarak büyüyüp ekranı kaplıyor. Framer Motion ile opacity ve boyut geçişleri yönetiliyor.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Anuloma Viloma Animasyonu (breathing-tree.tsx)
+- `requestAnimationFrame` tabanlı bir zamanlayıcı ile ağaç görselinin `clip-path` özelliği manipüle ediliyor.
+- 4 saniye nefes alma (ağaç kökten yukarı dolar), 8 saniye nefes verme (boşalır) döngüsü.
+- Burun deliği geçiş talimatları dinamik olarak güncelleniyor.
 
-## Learn More
+### 3. Prana Mudra Animasyonu (prana-mudra.tsx)
+- 5 aşamalı bir `sequence` dizisi üzerinden state makinesi mantığıyla ilerliyor (1→2→3→4→5→4→3→2→1).
+- Her aşama geçişinin kendi süresi var (hızlı/yavaş/orta) — `FAST`, `SLOW`, `MEDIUM` sabitleriyle yönetiliyor.
+- Sabit boyutlu container + `object-contain` ile görsel boyutları farklı olsa da sayfa kayması engelleniyor.
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Modal Sistemi
+`useState` ile yönetilen `activeModal` durumu, hangi nefes egzersizinin açık olduğunu kontrol ediyor. Tam ekran overlay + kapatma butonu.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Görsel İşleme
+Kaynak görseller (ağaç ikonu, mudra aşama illüstrasyonları) arka planları şeffaflaştırılarak ve içeriğe göre sıkı kırpılarak (tight crop) hazırlandı; böylece animasyon sırasında tutarlı hizalama sağlandı.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Dağıtım (Deployment)
+Proje GitHub'a push edildi, Vercel üzerinden GitHub reposu import edilerek otomatik CI/CD ile yayına alındı. Root Directory ayarı `yoga-sitesi` olarak yapılandırıldı (repo kökü ile proje kökü farklı olduğu için).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Öğrenilen / Kullanılan Kavramlar
+- React state yönetimi (`useState`, `useEffect`, `useRef`)
+- Component tabanlı mimari ve modülerlik
+- CSS animasyonları ve `clip-path` manipülasyonu
+- Git/GitHub iş akışı (`init`, `add`, `commit`, `push`, `remote`)
+- Next.js proje yapısı ve App Router
+- Vercel ile deployment süreci
