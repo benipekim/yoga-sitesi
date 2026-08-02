@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 // --- Tipler ---
@@ -64,9 +64,26 @@ function StageImage({ stage }: { stage: number }) {
 // --- Ana bileşen ---
 export function PranaMudra() {
   const current = usePranaSequence();
+  const [showInstructions, setShowInstructions] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6">
+    <div className="flex flex-col items-center justify-center gap-4 max-w-sm px-4">
+      <p className="text-white/70 text-sm text-center">
+        Prana mudra, ellerin özel bir şekilde konulması ve derin nefes alıp verme ile yapılan, vücuttaki yaşam enerjisini artıran bir çalışmadır.
+      </p>
+      <button
+        onClick={() => setShowInstructions(!showInstructions)}
+        className="text-white/50 text-xs underline"
+      >
+        {showInstructions ? 'Gizle' : 'Nasıl yapılır?'}
+      </button>
+
+      {showInstructions && (
+        <p className="text-white/70 text-sm text-center">
+          Her iki elinizde de yüzük parmağınız ile serçe parmağınızın uçlarını, başparmağınızın ucuna hafifçe dokundurun. Diğer iki parmağınız olan işaret ve orta parmağınızı ise kasmadan, düz ve rahat bir şekilde ileriye doğru uzatın. Mudra pozisyonunu korurken, burnunuzdan derin, yavaş ve sessiz nefesler almaya başlayın. Nefes alırken havanın ve yaşam enerjisinin önce alt karın bölgenize dolduğunu, ardından göğsünüze ve köprücük kemiklerinize doğru yükseldiğini hayal edin. Nefesinizi verirken ise yine aynı yavaşlıkla, tüm bedeninizin gevşediğini, stresin ve yorgunluğun sizi terk ettiğini hissedin. Zihninizi sadece nefesinizin ritmine ve parmak uçlarınızdaki hafif temas noktasına odaklayın.
+        </p>
+      )}
+
       <StageImage stage={current.stage} />
 
       <p className="text-white text-2xl font-medium tracking-wide">
