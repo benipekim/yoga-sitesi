@@ -54,8 +54,11 @@ export default function Home() {
     <PranaMudra />
   )}
 </div>
-      </div>
+</div>
     )}
+    <div className="fixed bottom-4 right-4 z-40 text-white text-lg font-semibold italic tracking-wide pointer-events-none">
+      İpek Ateş
+    </div>
     </>
   );
 }
