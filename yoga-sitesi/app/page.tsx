@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { FlowButton } from '@/components/ui/flow-button';
 
 export default function Home() {
+  const [activeModal, setActiveModal] = useState<'anuloma' | 'prana' | null>(null);
   return (
+    <>
     <ScrollExpandMedia
       mediaType="image"
       mediaSrc="/images/hero-willow.jpg"
@@ -23,10 +26,24 @@ export default function Home() {
           Nefesini düzenli tut ki hem beden hem zihin rahatı bulsun.
         </p>
         <div className="flex gap-4 justify-center mt-8">
-          <FlowButton text="Anuloma Viloma" />
-          <FlowButton text="Prana Mudra" />
+          <FlowButton text="Anuloma Viloma" onClick={() => setActiveModal('anuloma')} />
+          <FlowButton text="Prana Mudra" onClick={() => setActiveModal('prana')} />
         </div>
       </div>
     </ScrollExpandMedia>
+    {activeModal && (
+  <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+    <button
+      onClick={() => setActiveModal(null)}
+      className="absolute top-6 right-6 text-white text-2xl"
+    >
+      ✕
+    </button>
+    <p className="text-white text-2xl">
+      {activeModal === 'anuloma' ? 'Anuloma Viloma buraya gelecek' : 'Prana Mudra buraya gelecek'}
+    </p>
+      </div>
+    )}
+    </>
   );
 }
