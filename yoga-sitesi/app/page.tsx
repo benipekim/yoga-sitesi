@@ -1,12 +1,18 @@
 'use client';
 
-
+import { PranaMudra } from '@/components/blocks/prana-mudra';
 import { BreathingTree } from '@/components/blocks/breathing-tree';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { FlowButton } from '@/components/ui/flow-button';
 
 export default function Home() {
+  useEffect(() => {
+  if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+}, []);
   const [activeModal, setActiveModal] = useState<'anuloma' | 'prana' | null>(null);
   return (
     <>
@@ -45,7 +51,7 @@ export default function Home() {
   {activeModal === 'anuloma' ? (
     <BreathingTree />
   ) : (
-    <p className="text-white text-2xl">Prana Mudra buraya gelecek</p>
+    <PranaMudra />
   )}
 </div>
       </div>

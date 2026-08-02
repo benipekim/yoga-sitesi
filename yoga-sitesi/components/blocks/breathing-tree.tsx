@@ -39,7 +39,7 @@ export function BreathingTree() {
   return (
     <div className="flex flex-col items-center justify-center gap-4 max-w-sm px-4">
       <p className="text-white/70 text-sm text-center">
-        Sağ elinin başparmağı ve yüzük parmağıyla burun deliklerini sırayla kapatarak nefes al-ver.
+        Sağ elinin başparmağı ve yüzük parmağıyla burun deliklerini sırayla kapatarak nefes al ver.
       </p>
 
       <button
