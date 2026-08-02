@@ -1,5 +1,7 @@
 'use client';
 
+
+import { BreathingTree } from '@/components/blocks/breathing-tree';
 import { useState } from 'react';
 import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import { FlowButton } from '@/components/ui/flow-button';
@@ -32,16 +34,20 @@ export default function Home() {
       </div>
     </ScrollExpandMedia>
     {activeModal && (
-  <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+  <div className="fixed inset-0 z-50 bg-[#101408]/95 flex items-center justify-center">
     <button
       onClick={() => setActiveModal(null)}
       className="absolute top-6 right-6 text-white text-2xl"
     >
       ✕
     </button>
-    <p className="text-white text-2xl">
-      {activeModal === 'anuloma' ? 'Anuloma Viloma buraya gelecek' : 'Prana Mudra buraya gelecek'}
-    </p>
+    <div className="text-white text-2xl">
+  {activeModal === 'anuloma' ? (
+    <BreathingTree />
+  ) : (
+    <p className="text-white text-2xl">Prana Mudra buraya gelecek</p>
+  )}
+</div>
       </div>
     )}
     </>
